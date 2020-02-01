@@ -1,25 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { ContextExample } from './Contexts/ContextExample';
-
+//Los siguientes import es para el contextApi.
 import injectContext from "./store/appContext.js";
-import Home from "./views/home";
-import OtherHome from "./views/otherHome";
+//Los siguientes import son para algún cambio visual en caso de necesitarse.
+
+//Los siguientes import son los componentes de las vistas
+import Home from "./components/views/home";
+// Los siguientes import son especiales, como un token o algo así.
 
 
 const Layout = props => {
-	const [value, setValue] = useState('Hola desde el state del Layout, pasado por el context');
+
 	const basename = process.env.BASENAME || "";
 	return (
 		<div>
 			<BrowserRouter basename={basename}>
-				<ContextExample.Provider value={{ value, setValue }}>
-					<Switch>
-						<Route exact path="/otherhome" component={OtherHome} />
-						<Route exact path="/" component={Home} />
-						<Route render={() => <h1>Error 404!</h1>} />
-					</Switch>
-				</ContextExample.Provider>
+				<Switch>
+					<Route exact path="/" component={Home} />
+					<Route render={() => <h1>Error 404!</h1>} />
+				</Switch>
 			</BrowserRouter>
 		</div>
 	);
